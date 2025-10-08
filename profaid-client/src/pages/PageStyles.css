@@ -1,0 +1,44 @@
+.page-container {
+  padding: 20px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  gap: 12px;
+}
+
+.form-container input,
+.form-container textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.form-container button {
+  background: #1976d2;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.form-container button:hover {
+  background: #145ca1;
+}
+
+.archive-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.archive-card {
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
