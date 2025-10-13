@@ -46,7 +46,10 @@ const createDoubt = async (req, res) => {
       }
     });
 
-    res.status(201).json({ message: "Doubt saved successfully!" });
+    res.status(201).json({ 
+        message: "Doubt saved successfully!",
+        doubt: newDoubt // Return the actual created document
+    }); 
   } catch (error) {
     console.error("❌ createDoubt Error:", error);
     res.status(500).json({ message: error.message });

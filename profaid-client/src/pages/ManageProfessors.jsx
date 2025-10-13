@@ -59,6 +59,8 @@ const customStyles = `
     border-radius: 12px;
     overflow: hidden; /* Important for rounding corners */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); 
+    /* 🎯 Ensure table within responsive container uses full width */
+    width: 100%; 
   }
 
   .prof-aid-table thead th {
@@ -230,7 +232,7 @@ const ManageProfessors = () => {
       
       <AdminNavbar />
 
-      <Container className="py-5">
+      <Container className="py-5 container-fluid container-xl"> {/* 🎯 Using container-fluid/xl for max width */}
         <h2 className="mb-4 prof-aid-text-accent">Manage Professors 🧑‍🏫</h2>
 
         <Row className="mb-4">
@@ -268,7 +270,7 @@ const ManageProfessors = () => {
 
         {/* Form Section */}
         {showForm && (
-          <Card className="mb-5 prof-aid-card">
+          <Card className="mb-5 prof-aid-card w-100">
             <Card.Body>
               <Card.Title className="prof-aid-text-accent mb-3">
                 {showForm === "edit" ? "Edit Professor" : "Add Professor"}
@@ -409,7 +411,7 @@ const ManageProfessors = () => {
         )}
 
         {/* Professors Table */}
-        <Card className="prof-aid-card p-0">
+        <Card className="prof-aid-card p-0 w-100"> {/* 🎯 Added w-100 to ensure card takes full column width */}
           {loading ? (
             <div className="d-flex justify-content-center p-5">
               <Spinner animation="border" variant="secondary" role="status" />

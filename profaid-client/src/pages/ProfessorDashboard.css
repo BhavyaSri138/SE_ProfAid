@@ -1,0 +1,133 @@
+/* Background Gradient - Vibrant Orange Theme */
+.professor-dashboard {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffb347, #ff7e5f, #ff9966);
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  padding-bottom: 40px;
+  animation: gradientShift 8s ease infinite alternate;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* Main Container */
+.dashboard-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(255, 111, 0, 0.3);
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s ease;
+}
+
+.dashboard-container:hover {
+  transform: translateY(-5px);
+}
+
+/* Header */
+.dashboard-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #ff6f00;
+  margin-bottom: 20px;
+}
+
+.dashboard-title span {
+  font-size: 18px;
+  font-weight: 400;
+  color: #7a4a00;
+  display: block;
+  margin-top: 6px;
+}
+
+/* Professor Info */
+.professor-info {
+  background: linear-gradient(90deg, #ffe0b2, #fff3e0);
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 8px rgba(255, 111, 0, 0.25);
+}
+
+.professor-info p {
+  margin: 6px 0;
+  font-size: 16px;
+  color: #444;
+}
+
+/* Section Title */
+.section-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  color: #e65100;
+  margin-bottom: 20px;
+}
+
+/* Doubt Cards */
+.doubt-card {
+  background: linear-gradient(135deg, #fff8e1, #ffe0b2);
+  border: 1px solid #ffcc80;
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(255, 111, 0, 0.25);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.doubt-card::before {
+  content: "🟠";
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 20px;
+  opacity: 0.8;
+}
+
+.doubt-card:hover {
+  transform: translateY(-2px); /* subtle lift */
+  background: linear-gradient(135deg, #fff6e0, #ffe6b3); /* lighter, soft orange gradient */
+  box-shadow: 0 6px 12px rgba(255, 140, 0, 0.18); /* gentle shadow */
+}
+
+/* Doubt Text */
+.doubt-card h4 {
+  color: #d84315;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.doubt-card p {
+  margin: 4px 0;
+  color: #333;
+  font-size: 15px;
+}
+
+strong {
+  color: #bf360c;
+}
+
+/* No Doubts */
+.no-doubts {
+  text-align: center;
+  font-size: 18px;
+  color: #4e342e;
+  background: linear-gradient(90deg, #fff3e0, #ffe0b2);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(255, 126, 95, 0.25);
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

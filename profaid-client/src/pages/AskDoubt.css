@@ -1,0 +1,115 @@
+/* === ProfAid Ask Doubt Page (Orange Theme) === */
+
+/* Page background */
+.ask-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #ffb876, #ffcc99, #ffe1b3);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 80px 20px;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+}
+
+/* === Form Container === */
+.ask-doubt-container {
+  background: #ffffff;
+  color: #333333;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(255, 153, 51, 0.25);
+  padding: 35px;
+  width: 100%;
+  max-width: 650px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.ask-doubt-container h2 {
+  text-align: center;
+  color: #e76f00;
+  margin-bottom: 25px;
+  font-weight: 700;
+  font-size: 1.9rem;
+}
+
+/* === Form Labels === */
+.ask-doubt-container label {
+  display: block;
+  margin-bottom: 6px;
+  color: #e76f00;
+  font-weight: 600;
+}
+
+/* === Inputs, Textarea, Select === */
+.ask-doubt-container input[type="text"],
+.ask-doubt-container select,
+.ask-doubt-container textarea,
+.ask-doubt-container input[type="file"] {
+  width: 100%;
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #ffc266;
+  background: #fff8f1;
+  color: #333333;
+  font-size: 1rem;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.ask-doubt-container input:focus,
+.ask-doubt-container textarea:focus,
+.ask-doubt-container select:focus {
+  border-color: #ff9933;
+  box-shadow: 0 0 8px rgba(255, 153, 51, 0.4);
+  outline: none;
+}
+
+.ask-doubt-container textarea {
+  resize: vertical;
+}
+
+/* === Button === */
+.ask-doubt-container button {
+  background: #ff7b00;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  width: 100%;
+  box-shadow: 0 6px 15px rgba(255, 153, 51, 0.3);
+}
+
+.ask-doubt-container button:hover {
+  background: #e76f00;
+  transform: scale(1.04);
+}
+
+/* === Animation === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .ask-doubt-container {
+    padding: 25px 20px;
+  }
+
+  .ask-doubt-container h2 {
+    font-size: 1.6rem;
+  }
+
+  .ask-doubt-container button {
+    padding: 12px 20px;
+  }
+}

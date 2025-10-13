@@ -1,0 +1,190 @@
+/* ===== ProfAid Student Dashboard Theme ===== */
+
+/* Background with soft light orange gradient */
+.dashboard-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #ffb876, #ffcc99, #ffe1b3);
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  padding: 80px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===== Welcome Box ===== */
+.welcome-box {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 25px 30px;
+  text-align: center;
+  box-shadow: 0 8px 18px rgba(255, 153, 51, 0.2);
+  max-width: 850px;
+  width: 90%;
+  margin-bottom: 25px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.welcome-box h2 {
+  color: #e76f00;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.welcome-box p {
+  color: #444;
+  font-size: 1rem;
+}
+
+/* ===== Links Section ===== */
+.links-section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin: 20px 0 30px;
+  width: 90%;
+  max-width: 900px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 25px;
+  text-align: center;
+  width: 260px;
+  cursor: pointer;
+  border-left: 6px solid #ff9933;
+  box-shadow: 0 6px 15px rgba(255, 153, 51, 0.2);
+  transition: all 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  background: #fff7ed;
+  box-shadow: 0 8px 20px rgba(255, 153, 51, 0.3);
+}
+
+.card h3 {
+  color: #e76f00;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* ===== Ask Doubt Button ===== */
+.ask-btn {
+  background: #ff7b00;
+  color: white;
+  border: none;
+  padding: 12px 35px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 15px rgba(255, 140, 0, 0.3);
+  margin-bottom: 40px;
+}
+
+.ask-btn:hover {
+  background: #e76f00;
+  transform: scale(1.05);
+}
+
+/* ===== Doubts Section ===== */
+.doubts-section {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 25px;
+  width: 90%;
+  max-width: 850px;
+  box-shadow: 0 8px 18px rgba(255, 153, 51, 0.25);
+  margin-bottom: 40px;
+}
+
+.doubts-section h2 {
+  color: #e76f00;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.doubt-card {
+  background: #ffffff;
+  border-left: 5px solid #ff9933;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(255, 153, 51, 0.2);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.doubt-card:hover {
+  transform: translateY(-3px);
+  background: #fff7ec;
+  box-shadow: 0 6px 15px rgba(255, 153, 51, 0.25);
+}
+
+.doubt-card h4 {
+  color: #ff7b00;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.doubt-card p {
+  color: #333;
+}
+
+.doubt-card small {
+  color: #666;
+  display: block;
+  margin-top: 5px;
+}
+
+/* ===== No Doubts ===== */
+.no-doubts {
+  text-align: center;
+  color: #e76f00;
+  background: #fff7ed;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* ===== Animation ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .welcome-box,
+  .doubts-section {
+    padding: 20px;
+  }
+
+  .card {
+    width: 90%;
+  }
+
+  .ask-btn {
+    width: 90%;
+  }
+
+  .welcome-box h2 {
+    font-size: 1.5rem;
+  }
+}

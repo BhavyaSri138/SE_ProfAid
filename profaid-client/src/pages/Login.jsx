@@ -55,6 +55,11 @@ const customStyles = `
     border-color: #FF7B54 !important;
     box-shadow: 0 0 0 0.25rem rgba(255, 123, 84, 0.25) !important; /* Soft coral shadow */
   }
+
+  /* 7. Navbar Brand Text Shadow for crisp look */
+  .prof-aid-brand-text {
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  }
 `;
 
 // --- Inline SVG Icons (For password toggle) ---
@@ -140,19 +145,19 @@ const Login = () => {
     <div className="prof-aid-bg-full d-flex flex-column">
       <style>{customStyles}</style>
       
-      {/* --- 1. NAVBAR (Transparent over Gradient, using FaGraduationCap) --- */}
+      {/* --- 1. NAVBAR (Transparent over Gradient, with Text Shadow) --- */}
       <nav className="navbar navbar-expand-lg navbar-dark shadow-sm prof-aid-navbar-transparent">
         <Container className="container-xl">
           <a className="navbar-brand fw-bolder text-white fs-3 d-flex align-items-center" href="#">
-            <FaGraduationCap className="me-2 fs-2" />
-            Profaid
+            <FaGraduationCap className="me-2 fs-3 prof-aid-brand-text" />
+            <span className="prof-aid-brand-text">Profaid</span> 
           </a>
         </Container>
       </nav>
 
       {/* --- 2. MAIN CONTENT & ROLE SELECTION --- */}
       <div className="flex-grow-1 d-flex flex-column align-items-center justify-content-center p-3 p-md-5">
-        <div className="text-center mb-5 text-white">
+        <div className="text-center mb-2 text-white"> {/* 🎯 Reduced mb-5 to mb-4 */}
             {/* Title matching the screenshot style */}
             <h1 className="fw-bolder display-4" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.4)'}}>
                 Welcome to the Profaid Platform
@@ -164,11 +169,11 @@ const Login = () => {
 
         {/* Role Cards / Selection */}
         {!role ? (
-            <div className="row g-4 justify-content-center" style={{ maxWidth: '1200px', width: '100%' }}>
+            <div className="row g-3 justify-content-center" style={{ maxWidth: '1200px', width: '100%' }}> {/* 🎯 Reduced g-4 to g-3 */}
                 {["Student", "Professor", "Admin"].map((r) => (
                     <div key={r} className="col-lg-4 col-md-6 col-sm-12">
                         <div 
-                            className="card text-center p-4 h-100 prof-aid-role-card" 
+                            className="card text-center p-4 h-100 prof-aid-role-card mx-5" 
                             onClick={() => {setRole(r); setError("");}}
                             style={{ cursor: 'pointer' }}
                         >

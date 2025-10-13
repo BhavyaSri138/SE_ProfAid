@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react"; // 🎯 Import useState and useEffect
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import 'animate.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import { FaBell, FaLock, FaBook, FaMobileAlt, FaUserAlt, FaPenFancy, FaComments, FaGraduationCap } from 'react-icons/fa'; // Added FaGraduationCap
+import { FaBell, FaLock, FaBook, FaMobileAlt, FaUserAlt, FaPenFancy, FaComments, FaGraduationCap } from 'react-icons/fa'; 
 import { Link } from "react-router-dom"; 
 
 // --- ProfAid Custom Styles (Unified Warm Sunset Palette) ---
@@ -19,22 +19,28 @@ const customStyles = `
   
   /* Primary Accent Color (Coral for Buttons, Links) */
   .prof-aid-primary-btn, .prof-aid-primary-btn:hover, .prof-aid-primary-btn:focus {
-    background-color: #FF7B54 !important; /* The most vibrant coral */
+    background-color: #FF7B54 !important; 
     border-color: #FF7B54 !important;
     color: white !important;
     font-weight: 600;
   }
   
-  /* Deep Accent Color (Burnt Orange for Titles, Navbar background) */
+  /* Deep Accent Color (Burnt Orange for Titles, solid Navbar BG) */
   .prof-aid-deep-accent {
     color: #D84315 !important; 
   }
-
+  
+  /* 🎯 SOLID NAVBAR BACKGROUND CLASS */
+  .prof-aid-navbar-solid {
+    background-color: #D84315 !important; /* Deep Burnt Orange */
+    transition: background-color 0.3s ease-in-out;
+  }
+  
   /* Navbar Styling (Semi-transparent white over the gradient) */
   .prof-aid-navbar-transparent {
     background-color: rgba(255, 255, 255, 0.1) !important; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    padding: 15px 0;
+    box-shadow: none !important; /* Remove shadow when transparent for cleaner look */
+    transition: background-color 0.3s ease-in-out;
   }
   
   /* Card Styling (Clean White for contrast) */
@@ -65,19 +71,42 @@ const customStyles = `
 `;
 
 export default function Home() {
+  // 🎯 New state to track if the page has scrolled past the top
+  const [scrolled, setScrolled] = useState(false);
+
+  // 🎯 useEffect for scroll listener
+  useEffect(() => {
+    const handleScroll = () => {
+      // Set 'scrolled' to true if vertical scroll position (scrollY) is greater than 50px
+      setScrolled(window.scrollY > 50);
+    };
+
+    // Attach the event listener when the component mounts
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []); // Empty dependency array means this runs only on mount and unmount
+
+
   return (
     <div className="prof-aid-full-gradient-bg">
       <style>{customStyles}</style> 
       
-      {/* --- Navbar (Semi-transparent over the gradient) --- */}
+      {/* --- Navbar (Dynamic Color Change) --- */}
       <nav 
-        className="navbar navbar-expand-lg navbar-dark prof-aid-navbar-transparent shadow-sm fixed-top" 
+        // 🎯 Apply classes conditionally: transparent if not scrolled, solid if scrolled
+        className={`navbar navbar-expand-lg navbar-dark shadow-sm fixed-top ${
+            scrolled ? 'prof-aid-navbar-solid' : 'prof-aid-navbar-transparent'
+        }`}
         style={{ zIndex: 1050 }}
       >
         <div className="container-fluid container-xl">
           <Link className="navbar-brand d-flex align-items-center text-white fw-bold fs-4" to="#home">
             <h4 className="m-0 text-on-gradient" style={{ fontWeight:'bolder' }}>
-              <FaGraduationCap className="me-2 fs-1" /> ProfAid
+              <FaGraduationCap className="me-2 fs-3" /> ProfAid {/* Changed fs-1 to fs-3 for better visual size */}
             </h4>
           </Link>
           <button
@@ -104,7 +133,7 @@ export default function Home() {
                 <a className="nav-link text-white text-on-gradient" href="#features">Features</a>
               </li>
               <li className="nav-item">
-                {/* Login Button (White button for high contrast against the semi-transparent nav) */}
+                {/* Login Button (White button for high contrast against the transparent/solid nav) */}
                 <Link 
                     className="btn ms-3 btn-light fw-bold" 
                     to="/login"
@@ -118,6 +147,7 @@ export default function Home() {
       </nav>
 
       {/* --- Welcome Section (Part of the main full-screen gradient) --- */}
+      {/* Rest of the component content remains the same */}
       <section 
         id="home" 
         className="text-center py-5" 

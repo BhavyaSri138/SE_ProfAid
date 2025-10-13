@@ -1,0 +1,102 @@
+/* ===== ProfAid Light Orange Theme ===== */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(180deg, #ffb876, #ffcc99, #ffe1b3);
+  min-height: 100vh;
+}
+
+/* ===== Page Layout ===== */
+.history-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 20px;
+}
+
+/* ===== White Content Box ===== */
+.history-box {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 30px;
+  width: 90%;
+  max-width: 900px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* ===== Title ===== */
+.title {
+  text-align: center;
+  color: #e76f00;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 25px;
+}
+
+/* ===== Doubt Cards ===== */
+.doubt-card {
+  background: #ffffff;
+  border-left: 5px solid #ff9933;
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(255, 153, 51, 0.15);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.doubt-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(255, 153, 51, 0.25);
+}
+
+.doubt-card h4 {
+  color: #ff7b00;
+  margin-bottom: 8px;
+}
+
+.doubt-card p {
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.doubt-card small {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+/* ===== Empty State ===== */
+.no-doubts {
+  text-align: center;
+  color: #e76f00;
+  font-weight: 500;
+  background: #fff7ed;
+  border-radius: 12px;
+  padding: 15px;
+}
+
+/* ===== Animation ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .history-box {
+    padding: 20px;
+  }
+
+  .doubt-card {
+    padding: 15px;
+  }
+}
