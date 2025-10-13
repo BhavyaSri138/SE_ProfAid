@@ -84,40 +84,40 @@ const AdminDashboard = () => {
   const handleApiCall = async (url, method = 'GET', body = null) => {
     setAlertMessage(null);
     const token = localStorage.getItem("authToken");
-    
+
     try {
-        const headers = {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        };
+      const headers = {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      };
 
-        const res = await fetch(url, {
-            method,
-            headers,
-            body: body ? JSON.stringify(body) : null,
-        });
+      const res = await fetch(url, {
+        method,
+        headers,
+        body: body ? JSON.stringify(body) : null,
+      });
 
-        const data = await res.json();
-        
-        if (!res.ok) {
-            setAlertMessage({ type: 'danger', message: data.message || 'An error occurred.' });
-            return { success: false, data: null };
-        }
-        return { success: true, data };
+      const data = await res.json();
+
+      if (!res.ok) {
+        setAlertMessage({ type: 'danger', message: data.message || 'An error occurred.' });
+        return { success: false, data: null };
+      }
+      return { success: true, data };
 
     } catch (err) {
-        console.error("API Call Error:", err);
-        setAlertMessage({ type: 'danger', message: 'Network or server error.' });
-        return { success: false, data: null };
+      console.error("API Call Error:", err);
+      setAlertMessage({ type: 'danger', message: 'Network or server error.' });
+      return { success: false, data: null };
     }
   };
 
   // 🔹 Search by ID (unchanged)
   const handleSearchByID = async () => {
     if (!searchID.trim()) return setAlertMessage({ type: 'warning', message: "Please enter an ID" });
-    
+
     const { success, data } = await handleApiCall(
-        `http://localhost:5000/api/admins/search/id?ID=${searchID}`
+      `http://localhost:5000/api/admins/search/id?ID=${searchID}`
     );
 
     if (success) {
@@ -130,9 +130,9 @@ const AdminDashboard = () => {
   // 🔹 Search by Name (unchanged)
   const handleSearchByName = async () => {
     if (!searchName.trim()) return setAlertMessage({ type: 'warning', message: "Please enter a name" });
-    
+
     const { success, data } = await handleApiCall(
-        `http://localhost:5000/api/admins/search/name?name=${searchName}`
+      `http://localhost:5000/api/admins/search/name?name=${searchName}`
     );
 
     if (success) {
@@ -148,9 +148,9 @@ const AdminDashboard = () => {
       setLoading(true);
       try {
         const { success, data } = await handleApiCall(
-            "http://localhost:5000/api/doubts/unclarified-all"
+          "http://localhost:5000/api/doubts/unclarified-all"
         );
-        
+
         if (success) {
           setUnclarifiedDoubts(data);
         } else {
@@ -168,7 +168,7 @@ const AdminDashboard = () => {
 
   if (loading)
     return (
-      <div className="d-flex justify-content-center align-items-center prof-aid-bg" style={{height: "100vh"}}>
+      <div className="d-flex justify-content-center align-items-center prof-aid-bg" style={{ height: "100vh" }}>
         <Spinner animation="border" variant="light" role="status">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
@@ -179,33 +179,33 @@ const AdminDashboard = () => {
     <div className="prof-aid-bg">
       {/* Inject custom styles for the theme */}
       <style>{customStyles}</style>
-      
+
       <AdminNavbar />
 
       <h1 className="main-dashboard-title">Admin Dashboard</h1>
 
       <Container className="py-2">
-        
+
         {/* Global Alert for Search/API messages */}
         {alertMessage && (
-            <Alert 
-                variant={alertMessage.type} 
-                onClose={() => setAlertMessage(null)} 
-                dismissible
-                className="mb-4"
-            >
-                {alertMessage.message}
-            </Alert>
+          <Alert
+            variant={alertMessage.type}
+            onClose={() => setAlertMessage(null)}
+            dismissible
+            className="mb-4"
+          >
+            {alertMessage.message}
+          </Alert>
         )}
-        
+
         {/* Main Layout Row */}
         <Row>
           {/* Left Column (Search and Results) */}
           <Col lg={6} className="mb-4 mb-lg-0">
-            
+
             <Button
               onClick={() => navigate("/manage-professors")}
-              className="mb-4 btn-prof-aid" 
+              className="mb-4 btn-prof-aid"
             >
               Manage Professors
             </Button>
@@ -213,7 +213,7 @@ const AdminDashboard = () => {
             {/* Search Section - Semi-transparent white background */}
             <div className="mb-5 search-container">
               <h4 className="mb-3 prof-aid-text-accent">Search Users & View Details</h4>
-              
+
               {/* Search by ID */}
               <Form.Group className="mb-3">
                 <InputGroup>
@@ -244,7 +244,7 @@ const AdminDashboard = () => {
                 </InputGroup>
               </Form.Group>
             </div>
-            
+
             {/* Search Results */}
             <h3 className="mb-3 prof-aid-text-accent">Search Results</h3>
             <Row>
@@ -259,7 +259,7 @@ const AdminDashboard = () => {
                           {person.Name}
                         </Card.Title>
                         <Card.Subtitle className="mb-1 text-danger small">
-                            Type: {person.Type || (person.StudentID ? "Student" : "Professor")}
+                          Type: {person.Type || (person.StudentID ? "Student" : "Professor")}
                         </Card.Subtitle>
                         <Card.Text as="div" className="small text-secondary">
                           <p className="mb-0">
@@ -331,7 +331,15 @@ const AdminDashboard = () => {
           </Col>
         </Row>
       </Container>
+      <footer className="w-100 py-3 text-center text-white small" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', marginTop: 'auto' }}>
+        <Container>
+          <p className="mb-0" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.4)' }}>
+            &copy; {new Date().getFullYear()} Profaid EdTech Platform. All rights reserved.
+          </p>
+        </Container>
+      </footer>
     </div>
+
   );
 };
 

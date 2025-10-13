@@ -58,22 +58,22 @@ const customStyles = `
 
 // --- Feedback Toast Component ---
 const FeedbackToast = ({ show, onClose, title, message, type }) => {
-    const HEADER_COLOR = type === 'success' ? '#4CAF50' : '#D84315'; // Green for success, Deep Coral for error
-    const ICON = type === 'success' ? <FaCheckCircle /> : <FaExclamationCircle />;
-    
-    return (
-        <ToastContainer position="top-center" style={{ zIndex: 1080, marginTop: '65px' }}>
-            <Toast onClose={onClose} show={show} delay={4000} autohide>
-                <Toast.Header style={{ backgroundColor: HEADER_COLOR, color: 'white', fontWeight: 'bold' }}>
-                    {ICON}
-                    <strong className="me-auto ms-2">{title}</strong>
-                </Toast.Header>
-                <Toast.Body style={{ color: '#333', backgroundColor: '#fffaf0' }}>
-                    {message}
-                </Toast.Body>
-            </Toast>
-        </ToastContainer>
-    );
+  const HEADER_COLOR = type === 'success' ? '#4CAF50' : '#D84315'; // Green for success, Deep Coral for error
+  const ICON = type === 'success' ? <FaCheckCircle /> : <FaExclamationCircle />;
+
+  return (
+    <ToastContainer position="top-center" style={{ zIndex: 1080, marginTop: '65px' }}>
+      <Toast onClose={onClose} show={show} delay={4000} autohide>
+        <Toast.Header style={{ backgroundColor: HEADER_COLOR, color: 'white', fontWeight: 'bold' }}>
+          {ICON}
+          <strong className="me-auto ms-2">{title}</strong>
+        </Toast.Header>
+        <Toast.Body style={{ color: '#333', backgroundColor: '#fffaf0' }}>
+          {message}
+        </Toast.Body>
+      </Toast>
+    </ToastContainer>
+  );
 };
 // --- End FeedbackToast Component ---
 
@@ -86,10 +86,10 @@ const AskDoubt = () => {
   const [description, setDescription] = useState("");
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   // 🎯 Renaming submitMessage to control the toast
-  const [showToast, setShowToast] = useState(false); 
-  const [toastData, setToastData] = useState({ title: '', message: '', type: 'success' }); 
+  const [showToast, setShowToast] = useState(false);
+  const [toastData, setToastData] = useState({ title: '', message: '', type: 'success' });
 
   // Helper for API calls (modified to set toast data on error)
   const handleApiCall = async (url) => {
@@ -139,7 +139,7 @@ const AskDoubt = () => {
 
     let response;
     let data = {};
-    
+
     try {
       const token = localStorage.getItem("authToken");
       const formData = new FormData();
@@ -153,7 +153,7 @@ const AskDoubt = () => {
       response = await fetch("http://localhost:5000/api/doubts", {
         method: "POST",
         headers: {
-            'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${token}`,
         },
         body: formData,
       });
@@ -161,60 +161,62 @@ const AskDoubt = () => {
       // 🎯 FIX: Attempt to safely parse the JSON data here.
       // This ensures we catch parsing failures without triggering the outer Network Error.
       try {
-          const contentType = response.headers.get("content-type");
-          if (contentType && contentType.includes("application/json")) {
-              data = await response.json();
-          }
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          data = await response.json();
+        }
       } catch (parseError) {
-          // If JSON parsing fails (e.g., empty body), 'data' remains empty, but the error 
-          // doesn't stop execution if response.ok is true.
-          console.warn("Could not parse JSON response body.", parseError);
+        // If JSON parsing fails (e.g., empty body), 'data' remains empty, but the error 
+        // doesn't stop execution if response.ok is true.
+        console.warn("Could not parse JSON response body.", parseError);
       }
-      
+
       // --- FINAL SUCCESS/FAILURE CHECK ---
       if (response.ok) {
         // SUCCESS LOGIC
         const message = data.message || "🎉 Doubt submitted successfully! Redirecting...";
         setToastData({ title: 'Success', message: message, type: 'success' });
         setShowToast(true);
-        
+
         // Clear form fields after successful submission
         setSubject("");
         setTitle("");
         setDescription("");
         setFiles([]);
-        document.getElementById("file-input").value = ""; 
-
+        const fileInput = document.getElementById("file-input");
+        if (fileInput) {
+          fileInput.value = ""; // Clear file input only if element is found
+        }
         // Navigate after a short delay
         setTimeout(() => {
-            navigate("/student-dashboard");
+         
         }, 1500);
 
       } else {
-         // SERVER REPORTED ERROR (4xx or 5xx status)
-         // 'data.message' will come from the safe parsing block above.
-         const errorMessage = data.message || "Submission failed due to server error.";
-         setToastData({ title: 'Error', message: errorMessage, type: 'danger' });
-         setShowToast(true);
+        // SERVER REPORTED ERROR (4xx or 5xx status)
+        // 'data.message' will come from the safe parsing block above.
+        const errorMessage = data.message || "Submission failed due to server error.";
+        setToastData({ title: 'Error', message: errorMessage, type: 'danger' });
+        setShowToast(true);
       }
-      
+
     } catch (err) {
       // CATCH BLOCK: This should now only handle true connection failures (pre-response).
       console.error("Critical Submission Failure:", err);
-      setToastData({ 
-          title: 'Network Error', 
-          message: "❌ Connection issue or server unavailable. Please try again.", 
-          type: 'danger' 
+      setToastData({
+        title: 'Network Error',
+        message: "❌ Connection issue or server unavailable. Please try again.",
+        type: 'danger'
       });
       setShowToast(true);
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
   };
 
   if (loading && !showToast)
     return (
-      <div className="d-flex justify-content-center align-items-center prof-aid-bg" style={{height: "100vh"}}>
+      <div className="d-flex justify-content-center align-items-center prof-aid-bg" style={{ height: "100vh" }}>
         <Spinner animation="border" variant="light" role="status">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
@@ -226,111 +228,118 @@ const AskDoubt = () => {
     <div className="prof-aid-bg">
       <style>{customStyles}</style>
       <StudentNavbar />
-      
+
       {/* 🎯 TOAST COMPONENT */}
-      <FeedbackToast 
-        show={showToast} 
-        onClose={() => setShowToast(false)} 
-        title={toastData.title} 
-        message={toastData.message} 
-        type={toastData.type} 
+      <FeedbackToast
+        show={showToast}
+        onClose={() => setShowToast(false)}
+        title={toastData.title}
+        message={toastData.message}
+        type={toastData.type}
       />
-      
+
       <Container className="ask-page-wrapper d-flex justify-content-center">
-        
+
         <Card className="prof-aid-form-card" style={{ maxWidth: '800px', width: '100%' }}>
-            <Card.Title className="text-center mb-4">
-                <h2 className="prof-aid-text-accent">💭 Ask a Doubt</h2>
-            </Card.Title>
+          <Card.Title className="text-center mb-4">
+            <h2 className="prof-aid-text-accent">💭 Ask a Doubt</h2>
+          </Card.Title>
 
-            {/* Note: The old Alert component is removed as the Toast handles feedback */}
-            
-            <Form onSubmit={handleSubmit}>
-                <Row className="g-3">
-                    {/* Subject Select */}
-                    <Col md={12}>
-                        <Form.Group>
-                            <Form.Label className="fw-semibold">📘 Subject</Form.Label>
-                            <Form.Select
-                                value={subject}
-                                onChange={(e) => setSubject(e.target.value)}
-                                required
-                                size="lg"
-                            >
-                                <option value="">-- Select Subject --</option>
-                                {subjects.map((subj, idx) => (
-                                    <option key={idx} value={subj}>
-                                        {subj}
-                                    </option>
-                                ))}
-                            </Form.Select>
-                        </Form.Group>
-                    </Col>
+          {/* Note: The old Alert component is removed as the Toast handles feedback */}
 
-                    {/* Doubt Title */}
-                    <Col md={12}>
-                        <Form.Group>
-                            <Form.Label className="fw-semibold">📝 Doubt Title</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={title}
-                                onChange={(e) => setTitle(e.target.value)}
-                                required
-                                placeholder="Enter your doubt title (max 100 characters)"
-                                size="lg"
-                            />
-                        </Form.Group>
-                    </Col>
+          <Form onSubmit={handleSubmit}>
+            <Row className="g-3">
+              {/* Subject Select */}
+              <Col md={12}>
+                <Form.Group>
+                  <Form.Label className="fw-semibold">📘 Subject</Form.Label>
+                  <Form.Select
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                    required
+                    size="lg"
+                  >
+                    <option value="">-- Select Subject --</option>
+                    {subjects.map((subj, idx) => (
+                      <option key={idx} value={subj}>
+                        {subj}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+              </Col>
 
-                    {/* Description */}
-                    <Col md={12}>
-                        <Form.Group>
-                            <Form.Label className="fw-semibold">🧠 Description</Form.Label>
-                            <Form.Control
-                                as="textarea"
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                                required
-                                rows={5}
-                                placeholder="Describe your doubt clearly..."
-                                size="lg"
-                            />
-                        </Form.Group>
-                    </Col>
+              {/* Doubt Title */}
+              <Col md={12}>
+                <Form.Group>
+                  <Form.Label className="fw-semibold">📝 Doubt Title</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    required
+                    placeholder="Enter your doubt title (max 100 characters)"
+                    size="lg"
+                  />
+                </Form.Group>
+              </Col>
 
-                    {/* File Attachments */}
-                    <Col md={12}>
-                        <Form.Group>
-                            <Form.Label className="fw-semibold">📎 Attach Files (Images/PDFs)</Form.Label>
-                            <Form.Control 
-                                type="file" 
-                                multiple 
-                                onChange={handleFileChange} 
-                                id="file-input"
-                            />
-                            {files.length > 0 && (
-                                <div className="file-list small text-muted">
-                                    Files to upload: {files.map(f => f.name).join(', ')}
-                                </div>
-                            )}
-                        </Form.Group>
-                    </Col>
+              {/* Description */}
+              <Col md={12}>
+                <Form.Group>
+                  <Form.Label className="fw-semibold">🧠 Description</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    required
+                    rows={5}
+                    placeholder="Describe your doubt clearly..."
+                    size="lg"
+                  />
+                </Form.Group>
+              </Col>
 
-                    {/* Submit Button */}
-                    <Col md={12} className="mt-4">
-                        <Button 
-                            type="submit" 
-                            className="w-100 btn-lg btn-prof-aid shadow"
-                            disabled={loading}
-                        >
-                            <FaPaperPlane className="me-2" /> 
-                            {loading ? 'Submitting...' : 'Submit Doubt'}
-                        </Button>
-                    </Col>
-                </Row>
-            </Form>
+              {/* File Attachments */}
+              <Col md={12}>
+                <Form.Group>
+                  <Form.Label className="fw-semibold">📎 Attach Files (Images/PDFs)</Form.Label>
+                  <Form.Control
+                    type="file"
+                    multiple
+                    onChange={handleFileChange}
+                    id="file-input"
+                  />
+                  {files.length > 0 && (
+                    <div className="file-list small text-muted">
+                      Files to upload: {files.map(f => f.name).join(', ')}
+                    </div>
+                  )}
+                </Form.Group>
+              </Col>
+
+              {/* Submit Button */}
+              <Col md={12} className="mt-4">
+                <Button
+                  type="submit"
+                  className="w-100 btn-lg btn-prof-aid shadow"
+                  disabled={loading}
+                >
+                  <FaPaperPlane className="me-2" />
+                  {loading ? 'Submitting...' : 'Submit Doubt'}
+                </Button>
+              </Col>
+            </Row>
+          </Form>
         </Card>
       </Container>
+      <footer className="w-100 py-3 text-center text-white small" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', marginTop: 'auto' }}>
+              <Container>
+                <p className="mb-0" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.4)' }}>
+                  &copy; {new Date().getFullYear()} Profaid EdTech Platform. All rights reserved.
+                </p>
+              </Container>
+            </footer>
     </div>
   );
 };
