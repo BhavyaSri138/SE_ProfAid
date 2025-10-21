@@ -333,7 +333,7 @@ const AskDoubt = () => {
           </Form>
         </Card>
       </Container>
-      <footer className="w-100 py-3 text-center text-white small" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', marginTop: 'auto' }}>
+      <footer className="w-100 py-3 text-center text-white small mb-0" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', marginTop: 'auto' }}>
               <Container>
                 <p className="mb-0" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.4)' }}>
                   &copy; {new Date().getFullYear()} Profaid EdTech Platform. All rights reserved.

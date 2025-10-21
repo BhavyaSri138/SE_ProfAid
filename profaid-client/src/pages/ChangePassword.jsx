@@ -84,7 +84,7 @@ const ChangePassword = () => {
       setMessage({ type: "danger", text: "New password must be at least 6 characters long." });
       return;
     }
-    
+
     // Determine the correct API endpoint
     let endpoint = "";
     if (role === "Professor") {
@@ -118,7 +118,7 @@ const ChangePassword = () => {
           type: "success",
           text: "Password changed successfully. Logging you out...",
         });
-        
+
         // Clear auth and redirect after success
         localStorage.clear();
         setTimeout(() => {
@@ -154,7 +154,7 @@ const ChangePassword = () => {
             <Card.Title className="text-center prof-aid-text-accent mb-4">
               <h2>Change Password</h2>
             </Card.Title>
-            
+
             {/* Message Alert */}
             {message && (
               <Alert variant={message.type} onClose={() => setMessage(null)} dismissible>
@@ -202,7 +202,7 @@ const ChangePassword = () => {
                   </Button>
                 </InputGroup>
                 <Form.Text className="text-muted">
-                    Must be at least 6 characters.
+                  Must be at least 6 characters.
                 </Form.Text>
               </Form.Group>
 
@@ -233,13 +233,16 @@ const ChangePassword = () => {
           </Card.Body>
         </Card>
       </Container>
-      <footer className="w-100 py-3 text-center text-white small" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', marginTop: 'auto' }}>
-              <Container>
-                <p className="mb-0" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.4)' }}>
-                  &copy; {new Date().getFullYear()} Profaid EdTech Platform. All rights reserved.
-                </p>
-              </Container>
-            </footer>
+      <footer className="w-100 py-3 text-center text-white small" style={{
+        backgroundColor: 'rgba(255, 255, 255, 0.1)', marginTop: 'auto', position: 'fixed',
+        bottom: 0
+      }}>
+        <Container>
+          <p className="mb-0" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.4)' }}>
+            &copy; {new Date().getFullYear()} Profaid EdTech Platform. All rights reserved.
+          </p>
+        </Container>
+      </footer>
     </div>
   );
 };
